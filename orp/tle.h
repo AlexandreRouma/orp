@@ -14,10 +14,10 @@ namespace orp {
         EPH_TYPE_NORMAL
     };
 
-    struct Cospar {
+    struct IntlDesignator {
         int launchYear;
         int launchNumber;
-        char piece[3];
+        char piece[4];
     };
 
     class TLE {
@@ -30,15 +30,12 @@ namespace orp {
          * @param line1 First line of the TLE set.
          * @param line2 Second line of the TLE set.
         */
-        TLE(const std::string& line1, const std::string& line2);
-
-        // Copy constructor
-        TLE(const TLE& b);
+        TLE(const std::string& line1, const std::string& line2, int epochCentury = 0);
 
         // Line 1 data
         int catalogNumber;
         Class classification;
-        Cospar cosparId;
+        IntlDesignator intlDesignator;
         int epochYear;
         double epochDay;
         double meanMotionDt;
@@ -58,6 +55,5 @@ namespace orp {
 
     private:
         void verifyChecksum(const std::string& line);
-        void verifySpaces(const std::string& line, const int spaces[], int spaceCount);
     };
 }
